@@ -1,4 +1,5 @@
 /* The prototype'd functions for the Graph ADT can be found here */
+#include "ListInt.h"
 #include <stdio.h>
 
 
@@ -41,4 +42,9 @@ int getDistance (GraphHndl G, int destination);
  * no valid path from source to destination*/
 /* Pre conditions -> G was made with newGraph and a doBFS has been
  * 					called at least once with a valid source*/
-IntListHndl getPathTo (Graph G, int destination);
+IntListHndl getPathTo (GraphHndl G, int destination);
+
+/* Prints each node and then its adjaceny list on the same line before
+ * moving onto the next line and printing that node and its adjacency list */
+/*Pre condition -> G was made with newGraph*/ 
+void printGraph(GraphHndl G);
