@@ -37,12 +37,12 @@ GraphHndl newGraph (int n)
 	return tempGraph;
 }
 
-void freeGraph (GraphHndl * G)
+void freeGraph (GraphHndl G)
 {
 	int i;
 	assert(G != NULL);
 	free(G->pathDistances);
-	for(i = 0; i < n; i++)
+	for(i = 0; i < G->size; i++)
 	{
 		freeList(&(G->paths[i]));
 		freeList(&(G->graph[i]));
@@ -53,16 +53,50 @@ void freeGraph (GraphHndl * G)
 	/*printf( "Freed the Graph! \n" );*/
 }
 
+/* This function add an edge in from's adjacency list to vertex to*/
+/* Pre conditions -> G was made with newGraph and from and to are
+ *					both vertices in the graph*/
+void addEdge (GraphHndl G, int from, int to)
+{
+	int inserted;
+	assert(G != NULL);
+	assert(from < G->size);
+	assert(to < G->size);
+	
+	inserted = 0;
+	if(isEmpty(G->graph[from]))
+	{
+		insertAtFront(G->graph[from], to);
+		return;
+	}
+	while(!offEnd(G->graph[from]))
+	{
+		if(getCurrent(G->graph[from]) > to)
+		{
+			insertBeforeCurrent(G->graph[from], to);
+			inserted = 1;
+			break;
+		}	
+		moveNext(G->graph[from]);
+	}
+	
+	if(inserted ==0)
+	{
+		insertAtBack(G->graph[from], to);
+		moveFirst(G->graph[from]);
+	}
+}
+
 void doBFS (GraphHndl G, int source);
 
-int getDistance (GraphHndl G, int destination);
+int getDistance (GraphHndl G, int destination)
 {
 	assert(G != NULL);
 	assert(G->source != -1);
-	return G->pathdistances[destination];
+	return G->pathDistances[destination];
 }
 
-IntListHndl getPathTo (Graph G, int destination)
+IntListHndl getPathTo (GraphHndl G, int destination)
 {
 	assert(G != NULL);
 	assert(G->source != -1);

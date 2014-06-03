@@ -17,7 +17,7 @@ GraphHndl newGraph (int n);
 /* Post Condition -> G is now set to NULL and is empty*/
 void freeGraph (GraphHndl G); 
 
-/* This function add an edge in from's adjacency list to vertex to*/
+/* This function adds an edge in from's adjacency list to vertex to*/
 /* Pre conditions -> G was made with newGraph and from and to are
  *					both vertices in the graph*/
 void addEdge (GraphHndl G, int from, int to);
