@@ -27,6 +27,9 @@ int main ()
 	
 	printGraph(TheGraph);
 	
+	printf("Attempting BFS from 0: \n");
+	doBFS(TheGraph, 0);
+	
 	printf("Freeing the graph\n");
 
 	freeGraph(TheGraph);

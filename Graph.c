@@ -53,9 +53,6 @@ void freeGraph (GraphHndl G)
 	/*printf( "Freed the Graph! \n" );*/
 }
 
-/* This function add an edge in from's adjacency list to vertex to*/
-/* Pre conditions -> G was made with newGraph and from and to are
- *					both vertices in the graph*/
 void addEdge (GraphHndl G, int from, int to)
 {
 	int inserted;
@@ -87,7 +84,51 @@ void addEdge (GraphHndl G, int from, int to)
 	}
 }
 
-void doBFS (GraphHndl G, int source);
+void doBFS (GraphHndl G, int source)
+{
+	assert(G != NULL);
+	int i;
+	/* Check to make sure a BFS is necessary, don't do it if it's already been done on that node*/
+	if(G->source != source){
+		G->source = source;
+		// Mark all the vertices as not visited
+		int visited[G->size];
+		for(int i = 0; i < V; i++)
+			visited[i] = 0;
+	 
+		/*Create a queue for BFS*/
+		IntListHndl queue;
+		queue = NULL;
+		queue = newList();
+	 
+		/* Mark the current node as visited and enqueue it */
+		visited[source] = 1;
+		insertAtBack(queue, source);
+	 
+		while(!isEmpty(queue))
+		{
+			/* Dequeue a vertex from queue and print it */
+			source = getFirst(queue);
+			printf("%d ", source);
+			deleteFirst(queue);
+	 
+			/* Get all adjacent vertices of the dequeued vertex s
+			 * If a adjacent has not been visited, then mark it visited
+			 * and enqueue it */
+			moveFirst(G->graph[source]);
+			for(i = getFirst(G->graph[source]); i != getLast(G->graph[source]); i = getCurrent(G->graph[source]))
+			{
+				if(visited[i] == 0)
+				{
+					visited[i] = 1;
+					insertAtBack(queue, i);
+				}
+				moveNext(G->graph[source]);
+			}
+		}
+	}
+}
+ 
 
 int getDistance (GraphHndl G, int destination)
 {
