@@ -5,9 +5,9 @@
 int main ()
 {
 
+	GraphHndl TheGraph;
 	/* List creation */
 	printf("Making the Graph...\n");
-	GraphHndl TheGraph;
 	TheGraph = NULL;
 	printf("Instantiating the Graph...\n");
 	TheGraph = newGraph(5);
