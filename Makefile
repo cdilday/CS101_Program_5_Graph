@@ -1,5 +1,8 @@
 # Makefile for Program 5's graph and drivers for IntList and modules - by Chris Dilday
 
+GraphMaker : GraphMaker.o ListInt.o Graph.o
+	gcc -ansi -Wall -Wextra -pedantic -o GraphMaker GraphMaker.o ListInt.o Graph.o
+
 Graphdr : Graphdr.o ListInt.o Graph.o
 	gcc -ansi -Wall -Wextra -pedantic -o Graphdr Graphdr.o ListInt.o Graph.o
 
@@ -19,4 +22,4 @@ ListIntdr.o : ListInt.h ListIntdr.c
 	gcc -c -ansi -Wall -Wextra -pedantic ListIntdr.c	
 
 clean :
-	rm ListInt.o ListIntdr ListIntdr.o Graph.o Graphdr Graphdr.o
+	rm ListInt.o ListIntdr ListIntdr.o Graph.o Graphdr Graphdr.o GraphMaker GraphMaker.o

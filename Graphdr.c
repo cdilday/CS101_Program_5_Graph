@@ -1,4 +1,4 @@
-/* This will test the BookList ADT */
+/* This will test the Graph ADT */
 #include "Graph.h"
 #include "myinclude.h"
 
